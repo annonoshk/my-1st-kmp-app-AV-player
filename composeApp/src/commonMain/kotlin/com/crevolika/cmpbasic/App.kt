@@ -20,68 +20,73 @@ import kotlinproject.composeapp.generated.resources.*
 import kotlinproject.composeapp.generated.resources.Res
 import kotlinx.coroutines.delay
 import kotlinx.datetime.*
+import kotlinx.datetime.format.byUnicodePattern
 import org.jetbrains.compose.resources.DrawableResource
+
 
 data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
 
 fun currentTimeAt(location: String, zone: TimeZone): String {
-    fun LocalTime.formatted() = "$hour:$minute:$second"
+    fun LocalTime.formatted()= "$hour:$minute:$second a"
 
-        val time = Clock.System.now()
-        val localTime = time.toLocalDateTime(zone).time
-        return "The time in $location is ${ localTime.formatted()}"
 
+    val time = Clock.System.now()
+    val localTime = time.toLocalDateTime(zone).time
+
+    return "The time in $location is ${localTime.formatted()}"
 }
 
-fun countries() = listOf(
-    Country("Seoul", TimeZone.of("Asia/Seoul"), Res.drawable.kr),
-    Country("France", TimeZone.of("Europe/Paris"),Res.drawable.fr),
-    Country("Mexico", TimeZone.of("America/Mexico_City"),Res.drawable.mx),
-    Country("Indonesia", TimeZone.of("Asia/Jakarta"),Res.drawable.id),
-    Country("Egypt", TimeZone.of("Africa/Cairo"),Res.drawable.eg),
+val defaultCountries = listOf(
+    Country("Korea", TimeZone.of("Asia/Seoul"), Res.drawable.kr),
+    Country("France", TimeZone.of("Europe/Paris"), Res.drawable.fr),
+    Country("Mexico", TimeZone.of("America/Mexico_City"), Res.drawable.mx),
+    Country("Indonesia", TimeZone.of("Asia/Jakarta"), Res.drawable.id),
+    Country("Egypt", TimeZone.of("Africa/Cairo"), Res.drawable.eg)
 )
-
 
 @Composable
 @Preview
-fun App() {
+fun App(countries: List<Country> = defaultCountries) {
     MaterialTheme {
-        var showContries by remember { mutableStateOf(false) }
+        var showCountries by remember { mutableStateOf(false) }
         var timeAtLocation by remember { mutableStateOf("No location selected") }
         var selectedZone by remember { mutableStateOf<TimeZone?>(null) }
+        var selectedCountryName by remember { mutableStateOf("No location selected") }
 
         LaunchedEffect(selectedZone) {
             while (true) { // Time goes up every second
                 if (selectedZone != null) {
-                    timeAtLocation = currentTimeAt("Location", selectedZone?: TimeZone.currentSystemDefault())
+                    timeAtLocation = currentTimeAt(selectedCountryName, selectedZone?: TimeZone.currentSystemDefault())
                 }
                 delay(1000L)
             }
         }
+        Column(modifier = Modifier.padding(20.dp)) {
 
-        Column (modifier = Modifier.padding(20.dp)) {
-            Text(timeAtLocation,
-                 style = TextStyle(fontSize = 20.sp),
-                 textAlign = TextAlign.Center,
-                 modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)
+            Text(
+                timeAtLocation,
+                style = TextStyle(fontSize = 20.sp),
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth().align(Alignment.CenterHorizontally)
             )
             Row(modifier = Modifier.padding(start = 20.dp, top = 10.dp)) {
                 DropdownMenu(
-                    expanded = showContries,
-                    onDismissRequest = { showContries = false }
+                    expanded = showCountries,
+                    onDismissRequest = { showCountries = false }
                 ) {
-                    countries().forEach { (name, zone, image) ->
+                    countries.forEach { (name, zone, image) ->
                         DropdownMenuItem(
                             onClick = {
                                 selectedZone = zone
-                                timeAtLocation = currentTimeAt(name,zone)
-                                showContries = false
+                                selectedCountryName = name
+                                timeAtLocation = currentTimeAt(name, zone)
+                                showCountries = false
                             }
                         ) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Image(
                                     painterResource(image),
-                                    modifier =Modifier.size(50.dp).padding(end = 10.dp),
+                                    modifier = Modifier.size(50.dp).padding(end = 10.dp),
                                     contentDescription = "$name flag"
                                 )
                                 Text(name)
@@ -90,14 +95,14 @@ fun App() {
                     }
                 }
             }
-                Button(modifier = Modifier.padding(start = 10.dp),
-                       onClick = { showContries = true }) {
-                    Text("Select Location ")
-                }
 
+            Button(modifier = Modifier.padding(start = 20.dp, top = 10.dp),
+                onClick = { showCountries = !showCountries }) {
+                Text("Select Location")
             }
         }
     }
+}
 
 
 /*
