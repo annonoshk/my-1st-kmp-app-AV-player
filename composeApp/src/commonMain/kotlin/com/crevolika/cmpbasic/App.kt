@@ -27,7 +27,7 @@ import org.jetbrains.compose.resources.DrawableResource
 data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
 
 fun currentTimeAt(location: String, zone: TimeZone): String {
-    fun LocalTime.formatted()= "$hour:$minute:$second a"
+    fun LocalTime.formatted()= "$hour:$minute:$second"
 
 
     val time = Clock.System.now()
