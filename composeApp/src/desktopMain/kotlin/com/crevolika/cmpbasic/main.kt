@@ -10,7 +10,7 @@ import org.jetbrains.compose.resources.painterResource
 
 fun main() = application {
     val state = rememberWindowState(
-        size = DpSize(400.dp,250.dp),
+        size = DpSize(400.dp,500.dp),
         position = WindowPosition(300.dp,300.dp)
     )
     Window(
