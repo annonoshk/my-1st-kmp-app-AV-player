@@ -22,3 +22,7 @@ Ktor
 # wasm broswer app, Android, Desktop app.
 
 ![Local Image](./readmefileImage_worldtimer.png)
+
+# This system will be updated as below
+
+This further will be improved the design using a dependency injection framework, such as Koin, to build and inject the table of locations. If the data is stored externally, you can use the Ktor library to fetch it over the network or the SQLDelight library to fetch it from a database.
