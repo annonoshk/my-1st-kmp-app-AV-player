@@ -70,7 +70,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(projects.shared)
             implementation(libs.kotlinx.datetime)
-        }
+            implementation("network.chaintech:compose-multiplatform-media-player:1.0.27")
+           }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)

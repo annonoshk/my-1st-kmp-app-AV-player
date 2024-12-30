@@ -19,5 +19,7 @@ fun main() = application {
         icon = painterResource(Res.drawable.privateeye)
     ){
         App()
+        VideoPlayer(url = "https://path.to/your/video.mp4")
     }
 }
+

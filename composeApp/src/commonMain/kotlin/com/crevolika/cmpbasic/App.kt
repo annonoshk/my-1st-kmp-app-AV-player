@@ -16,13 +16,13 @@ import androidx.compose.material.*
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import chaintech.videoplayer.ui.video.VideoPlayerComposable
 import kotlinproject.composeapp.generated.resources.*
 import kotlinproject.composeapp.generated.resources.Res
 import kotlinx.coroutines.delay
 import kotlinx.datetime.*
 import kotlinx.datetime.format.byUnicodePattern
 import org.jetbrains.compose.resources.DrawableResource
-
 
 data class Country(val name: String, val zone: TimeZone, val image: DrawableResource)
 
@@ -97,12 +97,18 @@ fun App(countries: List<Country> = defaultCountries) {
             }
 
             Button(modifier = Modifier.padding(start = 20.dp, top = 10.dp),
-                onClick = { showCountries = !showCountries }) {
+                   onClick = { showCountries = !showCountries }) {
                 Text("Select Location")
             }
+            VideoPlayerComposable(
+                modifier = Modifier.fillMaxSize(),
+                url = "https://www.youtube.com/shorts/FDPiAIcy8rc"
+            )
+
         }
     }
 }
+
 
 
 /*

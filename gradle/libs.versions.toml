@@ -1,6 +1,6 @@
 [versions]
 agp = "8.7.3"
-android-compileSdk = "34"
+android-compileSdk = "35"
 android-minSdk = "24"
 android-targetSdk = "34"
 androidx-activityCompose = "1.9.3"
@@ -12,14 +12,17 @@ androidx-lifecycle = "2.8.3"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
 compose-multiplatform = "1.7.0"
+composeMultiplatformMediaPlayer = "1.0.27"
 junit = "4.13.2"
 kotlin = "2.0.21"
 kotlinx-coroutines = "1.9.0"
 kotlinxDatetime = "0.6.0"
 ktor = "3.0.0"
 logback = "1.5.11"
+runtimeAndroid = "1.7.6"
 
 [libraries]
+compose-multiplatform-media-player = { module = "network.chaintech:compose-multiplatform-media-player", version.ref = "composeMultiplatformMediaPlayer" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -38,6 +41,7 @@ logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor" }
 ktor-server-tests = { module = "io.ktor:ktor-server-tests-jvm", version.ref = "ktor" }
+androidx-runtime-android = { group = "androidx.compose.runtime", name = "runtime-android", version.ref = "runtimeAndroid" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

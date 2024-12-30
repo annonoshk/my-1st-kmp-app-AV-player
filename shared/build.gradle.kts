@@ -42,6 +42,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             // put your Multiplatform dependencies here
+            //     implementation(libs.compose.multiplatform.media.player)
         }
     }
 }
@@ -56,4 +57,7 @@ android {
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
+}
+dependencies {
+    implementation(libs.androidx.runtime.android)
 }
