@@ -1,5 +1,5 @@
-# my-1st-kmp-app-world-timer
-my 1st Kotlin multiplatform web/app - World-timer
+# my-1st-kmp-app-world-deepfake portal
+my 1st Kotlin multiplatform web/app - World-timer real-time deepfake portal MVP
 
 1st init version created by Huck.Kim huck.kim@kangwon.ac.kr at 2024.12.16
 
